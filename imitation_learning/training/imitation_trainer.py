@@ -54,7 +54,7 @@ class ImitationLearningTrainer:
         # Training components
         self.optimizer = optim.Adam(self.policy.parameters(), lr=learning_rate)
         self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(
-            self.optimizer, patience=10, factor=0.5, verbose=True
+            self.optimizer, patience=10, factor=0.5
         )
         
         # Training state

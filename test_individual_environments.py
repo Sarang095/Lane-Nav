@@ -331,7 +331,7 @@ class IndividualEnvironmentTester:
             trainer = ImitationLearningTrainer(
                 policy=policy,
                 num_epochs=env_config['training_epochs'],
-                batch_size=32,
+                batch_size=1,
                 learning_rate=1e-3,
                 validation_split=0.2,
                 save_dir=str(output_dir / "trained_models"),

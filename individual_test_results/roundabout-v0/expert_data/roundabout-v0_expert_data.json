@@ -1,0 +1,7 @@
+{
+  "total_episodes": 20,
+  "valid_episodes": 10,
+  "total_steps": 200,
+  "avg_reward": 11.528846153846157,
+  "collection_time": 6.188589811325073
+}
