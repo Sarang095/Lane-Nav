@@ -341,6 +341,136 @@ parking_config = {
 }
 ```
 
+## 🎬 Viewing Final Simulations
+
+### Quick Demo - All Environments
+
+```bash
+# Interactive demo of all environments
+python3 run_simulation_demo.py
+
+# Demo specific environment
+python3 run_simulation_demo.py --env highway-v0
+
+# Demo with video recording
+python3 run_simulation_demo.py --env highway-v0 --record
+```
+
+### Method 1: Simple Visualization (Random Policy)
+
+```python
+import gymnasium as gym
+import highway_env
+
+# Create environment with human rendering
+env = gym.make("highway-v0", render_mode="human")
+obs, info = env.reset()
+
+# Run simulation loop
+for _ in range(1000):
+    action = env.action_space.sample()  # Random action
+    obs, reward, done, truncated, info = env.step(action)
+    env.render()  # Display the simulation
+    
+    if done or truncated:
+        obs, info = env.reset()
+
+env.close()
+```
+
+### Method 2: With Trained Model
+
+```python
+from stable_baselines3 import DQN
+import gymnasium as gym
+import highway_env
+
+# Load trained model
+env = gym.make("highway-v0", render_mode="human")
+model = DQN.load("path/to/your/model", env=env)
+
+# Run simulation with trained agent
+for episode in range(5):
+    obs, info = env.reset()
+    done = truncated = False
+    
+    while not (done or truncated):
+        action, _states = model.predict(obs, deterministic=True)
+        obs, reward, done, truncated, info = env.step(action)
+        env.render()  # Shows the simulation
+
+env.close()
+```
+
+### Method 3: Record Videos
+
+```python
+from gymnasium.wrappers import RecordVideo
+import gymnasium as gym
+import highway_env
+
+# Create environment with video recording
+env = gym.make("highway-v0", render_mode="rgb_array")
+env = RecordVideo(env, video_folder="./videos", episode_trigger=lambda e: True)
+
+# Run and record episodes
+for episode in range(3):
+    obs, info = env.reset()
+    done = truncated = False
+    
+    while not (done or truncated):
+        action = env.action_space.sample()
+        obs, reward, done, truncated, info = env.step(action)
+
+env.close()
+# Videos saved in ./videos/ folder
+```
+
+### Environment-Specific Visualization
+
+#### Highway Environment
+```bash
+python3 run_simulation_demo.py --env highway-v0 --episodes 5
+```
+
+#### Intersection Environment
+```bash
+python3 run_simulation_demo.py --env intersection-v0 --episodes 3
+```
+
+#### Roundabout Environment
+```bash
+python3 run_simulation_demo.py --env roundabout-v0 --episodes 3
+```
+
+#### Parking Environment
+```bash
+python3 run_simulation_demo.py --env parking-v0 --episodes 5
+```
+
+### With Imitation Learning Models
+
+```bash
+# Test with rendering enabled
+python3 test_individual_environments.py --env highway-v0 --render
+
+# Run evaluation with visualization
+python3 example_usage.py  # Includes visualization in evaluation phase
+```
+
+### Training Scripts with Visualization
+
+```bash
+# DQN training (shows final simulation)
+python3 scripts/sb3_highway_dqn.py
+
+# PPO training (shows final simulation)  
+python3 scripts/sb3_highway_ppo.py
+
+# HER training for parking (shows final simulation)
+python3 scripts/parking_her.py
+```
+
 ## 🔧 Advanced Usage
 
 ### Custom Environment Configuration
