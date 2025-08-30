@@ -18,10 +18,6 @@ A collection of environments for *autonomous driving* and tactical decision-maki
 
 ### Highway
 
-```python
-env = gymnasium.make("highway-v0")
-```
-
 In this task, the ego-vehicle is driving on a multilane highway populated with other vehicles.
 The agent's objective is to reach a high speed while avoiding collisions with neighbouring vehicles. Driving on the right side of the road is also rewarded.
 
@@ -33,10 +29,6 @@ The agent's objective is to reach a high speed while avoiding collisions with ne
 A faster variant, `highway-fast-v0` is also available, with a degraded simulation accuracy to improve speed for large-scale training.
 
 ### Merge
-
-```python
-env = gymnasium.make("merge-v0")
-```
 
 In this task, the ego-vehicle starts on a main highway but soon approaches a road junction with incoming vehicles on the access ramp. The agent's objective is now to maintain a high speed while making room for the vehicles so that they can safely merge in the traffic.
 
@@ -60,10 +52,6 @@ In this task, the ego-vehicle if approaching a roundabout with flowing traffic. 
 
 ### Parking
 
-```python
-env = gymnasium.make("parking-v0")
-```
-
 A goal-conditioned continuous control task in which the ego-vehicle must park in a given space with the appropriate heading.
 
 <p align="center">
@@ -73,10 +61,6 @@ A goal-conditioned continuous control task in which the ego-vehicle must park in
 
 ### Intersection
 
-```python
-env = gymnasium.make("intersection-v0")
-```
-
 An intersection negotiation task with dense traffic.
 
 <p align="center">
@@ -85,10 +69,6 @@ An intersection negotiation task with dense traffic.
 </p>
 
 ### Racetrack
-
-```python
-env = gymnasium.make("racetrack-v0")
-```
 
 A continuous control task involving lane-keeping and obstacle avoidance.
 
